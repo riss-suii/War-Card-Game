@@ -1,12 +1,9 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Scanner;
 
-
-public class WarCardGame {
-
-    public static void main(String[] args) {
+public class Main {
+    static void main() {
         InputHandler userInput = new InputHandler();
         FileLoader loader = new FileLoader();
 

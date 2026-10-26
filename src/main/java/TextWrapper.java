@@ -19,7 +19,7 @@ public class TextWrapper {
                 lineHasItem = true;
             } else {
                 String candidate = line + separator + gap + items.get(i);
-                if (candidate.length() + extra <= Constants.BANNER_WIDTH) {
+                if (candidate.length() + extra <= Constants.banner_width) {
                     line = new StringBuilder(candidate);
                 } else {
                     System.out.println(line + separator);

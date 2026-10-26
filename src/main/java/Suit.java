@@ -4,12 +4,16 @@ public enum Suit {
 
     private final String symbol;
 
-    Suit(String symbol) { this.symbol = symbol; }
+    Suit(String symbol) {
+        this.symbol = symbol;
+    }
 
-    String getSymbol() { return symbol; }
+    String getSymbol() {
+        return symbol;
+    }
 
     /** @return the matching suit, or null if the text is not a valid suit. */
-    static Suit fromSymbol(String text) {
+    public static Suit fromSymbol(String text) {
         for (Suit s : values()) {
             if (s.symbol.equals(text)) {
                 return s;

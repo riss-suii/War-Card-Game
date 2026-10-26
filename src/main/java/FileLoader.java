@@ -50,7 +50,7 @@ public class FileLoader {
                         message = "Invalid file format.";
                     } else if (targetDeck.contains(newCard)) {
                         message = "Duplicate cards detected.";
-                    } else if (targetDeck.size() == Constants.TOTAL_CARDS) {
+                    } else if (targetDeck.size() == Constants.total_cards) {
                         message = "Invalid number of cards in the deck.";
                     } else {
                         targetDeck.addCard(newCard);
@@ -60,7 +60,7 @@ public class FileLoader {
         } catch (IOException e) {
             return "File " + fileName + " cannot be found or opened.";
         }
-        if (message.isEmpty() && targetDeck.size() != Constants.TOTAL_CARDS) {
+        if (message.isEmpty() && targetDeck.size() != Constants.total_cards) {
             message = "Invalid number of cards in the deck.";
         }
         return message;

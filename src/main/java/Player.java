@@ -38,10 +38,6 @@ public class Player {
         return eliminated;
     }
 
-    public int getHandSize() {
-        return hand.size();
-    }
-
     public int getId() {
         return id;
     }

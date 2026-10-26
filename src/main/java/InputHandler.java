@@ -1,4 +1,3 @@
-import java.io.File;
 import java.util.Scanner;
 
 public class InputHandler {
@@ -17,13 +16,13 @@ public class InputHandler {
         int n;
         do {
             System.out.println("Please enter your desired number of players ("
-                    + Constants.MIN_PLAYERS + "-" + Constants.MAX_PLAYERS + "):");
+                    + Constants.min_players + "-" + Constants.max_players + "):");
             n = readInt();
-            if (n < Constants.MIN_PLAYERS || n > Constants.MAX_PLAYERS) {
+            if (n < Constants.min_players || n > Constants.max_players) {
                 System.out.println("Invalid number of players. Please enter a number between "
-                        + Constants.MIN_PLAYERS + " and " + Constants.MAX_PLAYERS + ".");
+                        + Constants.min_players + " and " + Constants.max_players + ".");
             }
-        } while (n < Constants.MIN_PLAYERS || n > Constants.MAX_PLAYERS);
+        } while (n < Constants.min_players || n > Constants.max_players);
         return n;
     }
 

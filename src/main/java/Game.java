@@ -4,6 +4,7 @@ import java.util.List;
 public class Game {
     private final List<Player> players;
     private final Deck gameDeck;
+    private final List<PlayedCard> pile = new ArrayList<>();
     private int roundNumber;
 
     Game(List<Player> players, Deck deck) {
@@ -12,7 +13,7 @@ public class Game {
         this.roundNumber = 0;
     }
 
-    void prepareGame(int numShuffles) {
+    public void prepareGame(int numShuffles) {
         gameDeck.shuffle(numShuffles);
         System.out.println();
         System.out.println("Shuffled Deck:");
@@ -22,41 +23,42 @@ public class Game {
         gameDeck.deal(players);
     }
 
-    void playRound() {
+    public void playRound() {
         roundNumber++;
-        List<PlayedCard> pile = new ArrayList<>();
+        pile.clear();
         for (Player p : players) {
             if (!p.isEliminated()) {
                 pile.add(new PlayedCard(p, p.playTopCard()));
             }
         }
-        displayRound(pile);
-        int winIndex = determineWinner(pile);
-        awardCards(winIndex, pile);
+        displayRound();
+        PlayedCard winner = determineWinner();
+        winner.owner().collectCards(cardsWinnerFirst(winner));
         List<Player> outPlayers = removeEliminatedPlayers();
-        displayStatus(pile.get(winIndex).owner, outPlayers);
+        displayStatus(winner.owner(), outPlayers);
     }
 
-    private int determineWinner(List<PlayedCard> pile) {
-        int best = 0;
-        for (int i = 1; i < pile.size(); i++) {
-            if (pile.get(i).cardPlayed.compareTo(pile.get(best).cardPlayed) > 0) {
-                best = i;
+    /** Highest card wins; on a tie the earlier play wins. */
+    private PlayedCard determineWinner() {
+        PlayedCard best = pile.get(0);
+        for (PlayedCard pc : pile) {
+            if (pc.cardPlayed().compareTo(best.cardPlayed()) > 0) {
+                best = pc;
             }
         }
         return best;
     }
 
-    /** Winner's cards go to the bottom of the winner's deck, winning card first. */
-    private void awardCards(int winIndex, List<PlayedCard> pile) {
-        List<Card> collected = new ArrayList<>();
-        collected.add(pile.get(winIndex).cardPlayed);
-        for (int i = 0; i < pile.size(); i++) {
-            if (i != winIndex) {
-                collected.add(pile.get(i).cardPlayed);
+    /** Winning card first, then the rest in play order. */
+    private List<Card> cardsWinnerFirst(PlayedCard winner) {
+        List<Card> cards = new ArrayList<>();
+        cards.add(winner.cardPlayed());
+        for (PlayedCard pc : pile) {
+            if (pc != winner) {
+                cards.add(pc.cardPlayed());
             }
         }
-        pile.get(winIndex).owner.collectCards(collected);
+        return cards;
     }
 
     private List<Player> removeEliminatedPlayers() {
@@ -70,10 +72,10 @@ public class Game {
         return out;
     }
 
-    private void displayRound(List<PlayedCard> pile) {
+    private void displayRound() {
         System.out.println(banner("ROUND " + roundNumber));
         for (PlayedCard pc : pile) {
-            System.out.println("Player " + pc.owner.getId() + ": " + pc.cardPlayed);
+            System.out.println("Player " + pc.owner().getId() + ": " + pc.cardPlayed());
         }
     }
 
@@ -101,15 +103,15 @@ public class Game {
     }
 
     private String banner(String title) {
-        int right = Constants.BANNER_WIDTH - Constants.BANNER_LEAD - title.length() - 2;
-        return "=".repeat(Constants.BANNER_LEAD) + " " + title + " " + "=".repeat(Math.max(0, right));
+        int right = Constants.banner_width - Constants.banner_lead - title.length() - 2;
+        return "=".repeat(Constants.banner_lead) + " " + title + " " + "=".repeat(Math.max(0, right));
     }
 
     private String rule() {
-        return "=".repeat(Constants.BANNER_WIDTH);
+        return "=".repeat(Constants.banner_width);
     }
 
-    boolean isGameOver() {
+    public boolean isGameOver() {
         return countActivePlayers() == 1;
     }
 
