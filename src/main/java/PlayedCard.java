@@ -1,1 +1,0 @@
-public record PlayedCard(Player owner, Card cardPlayed) {}
