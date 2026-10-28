@@ -36,7 +36,7 @@ public class InputHandler {
             System.out.println("Please enter your desired number of shuffles:");
             n = readInt();
             if (n <= 0) {
-                System.out.println("Invalid number of shuffles. Please enter a positive integer greater than 0.");
+                System.out.println("Invalid number of shuffles. Please enter a whole number greater than 0.");
             }
         } while (n <= 0);
         return n;
