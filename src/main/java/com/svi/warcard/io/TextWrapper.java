@@ -6,31 +6,46 @@ import java.util.List;
 
 public class TextWrapper {
 
+    private static final String RED = "\u001B[31m";
+    private static final String RESET = "\u001B[0m";
+
     /**
      * Prints items separated by 'separator' (plus 'gap'), wrapping lines at the banner width.
      * Continuation lines are indented to line up under the first item.
+     * Diamonds and hearts are printed in red.
      */
     public static void print(String prefix, List<String> items, String separator, String gap) {
         String indent = " ".repeat(prefix.length());
-        StringBuilder line = new StringBuilder(prefix);
+        StringBuilder line = new StringBuilder(prefix); // text with colors
+        int width = prefix.length();                     // visible width only
         boolean lineHasItem = false;
 
         for (int i = 0; i < items.size(); i++) {
+            String item = items.get(i);
             // Every item except the last is followed by a separator, which must also fit.
             int extra = (i < items.size() - 1) ? separator.length() : 0;
+
             if (!lineHasItem) {
-                line.append(items.get(i));
+                line.append(colorize(item));
+                width += item.length();
                 lineHasItem = true;
             } else {
-                String candidate = line + separator + gap + items.get(i);
-                if (candidate.length() + extra <= Constants.banner_width) {
-                    line = new StringBuilder(candidate);
+                int candidateWidth = width + separator.length() + gap.length() + item.length();
+                if (candidateWidth + extra <= Constants.banner_width) {
+                    line.append(separator).append(gap).append(colorize(item));
+                    width = candidateWidth;
                 } else {
                     System.out.println(line + separator);
-                    line = new StringBuilder(indent + items.get(i));
+                    line = new StringBuilder(indent).append(colorize(item));
+                    width = indent.length() + item.length();
                 }
             }
         }
         System.out.println(line);
+    }
+
+    public static String colorize(String item) {
+        boolean isRed = item.contains("♦") || item.contains("♥");
+        return isRed ? RED + item + RESET : item;
     }
 }

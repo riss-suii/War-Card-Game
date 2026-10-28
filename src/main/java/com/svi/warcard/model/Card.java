@@ -18,14 +18,24 @@ public class Card {
         return suit.compareTo(other.suit);
     }
 
-    /** Round display format, e.g. A-D. */
+    /** Round display format, e.g. ♥A-H. */
     @Override
     public String toString() {
-        return rank.getSymbol() + "-" + suit.getSymbol();
+        return suitIcon() + rank.getSymbol() + "-" + suit.getSymbol();
     }
 
-    /** File / deck display format, e.g. D-A. */
+    /** File / deck display format, e.g. ♥H-A. */
     public String fileFormat() {
-        return suit.getSymbol() + "-" + rank.getSymbol();
+        return suitIcon() + suit.getSymbol() + "-" + rank.getSymbol();
+    }
+
+    private String suitIcon() {
+        return switch (suit.getSymbol()) {
+            case "D" -> "♦";
+            case "H" -> "♥";
+            case "S" -> "♠";
+            case "C" -> "♣";
+            default -> "";
+        };
     }
 }

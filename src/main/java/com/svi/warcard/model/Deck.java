@@ -59,9 +59,7 @@ public class Deck {
         TextWrapper.print("", items, ",", "");
     }
 
-    public int size() {
-        return cards.size();
-    }
+    public int size() { return cards.size(); }
     public boolean isEmpty() {
         return cards.isEmpty();
     }

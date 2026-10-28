@@ -19,12 +19,11 @@ public class Main {
 
         try {
             do {
-                Deck gameDeck = loader.loadDeck(userInput);
+                Deck gameDeck = loader.loadDeck();
                 if (gameDeck.isEmpty()) {
                     System.out.println("Exiting program.");
                     finished = true;
                 } else {
-                    System.out.println();
                     int numPlayers = userInput.promptNumPlayers();
                     int numShuffles = userInput.promptNumShuffles();
                     System.out.println();
@@ -49,7 +48,6 @@ public class Main {
                 }
             } while (!finished);
         } catch (NoSuchElementException e) {
-            // Input stream ended (e.g. Ctrl+D) - leave quietly.
             System.out.println();
             System.out.println("Input ended. Exiting program.");
         }
