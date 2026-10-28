@@ -6,9 +6,9 @@ import java.util.List;
 
 public class TextWrapper {
 
-    private static final String RED = "\u001B[31m";
-    private static final String RESET = "\u001B[0m";
-
+    public static final String RED = "\u001B[31m";
+    public static final String RESET = "\u001B[0m";
+    public static final String CYAN = "\u001B[36m";
     /**
      * Prints items separated by 'separator' (plus 'gap'), wrapping lines at the banner width.
      * Continuation lines are indented to line up under the first item.
@@ -31,7 +31,7 @@ public class TextWrapper {
                 lineHasItem = true;
             } else {
                 int candidateWidth = width + separator.length() + gap.length() + item.length();
-                if (candidateWidth + extra <= Constants.banner_width) {
+                if (candidateWidth + extra <= Constants.BANNER_WIDTH) {
                     line.append(separator).append(gap).append(colorize(item));
                     width = candidateWidth;
                 } else {
@@ -44,8 +44,15 @@ public class TextWrapper {
         System.out.println(line);
     }
 
+    public static String center(String text) {
+        int pad = Math.max(0, (42 - text.length()) / 2);
+        return " ".repeat(pad) + text;
+    }
+
     public static String colorize(String item) {
         boolean isRed = item.contains("♦") || item.contains("♥");
         return isRed ? RED + item + RESET : item;
     }
 }
+
+

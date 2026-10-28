@@ -104,21 +104,23 @@ public class Game {
     }
 
     void displayGameOver() {
-        System.out.println(banner("GAME OVER "));
-        System.out.println("Player " + getWinner().getId() + " Wins!");
         System.out.println();
-        System.out.println("Thank you for playing.");
-        System.out.println(rule());
+        System.out.println(TextWrapper.CYAN + "================ VICTORY =================");
+        System.out.println(TextWrapper.center("👑"));
+        System.out.println(TextWrapper.center("PLAYER " + getWinner().getId() + " WINS!"));
+        System.out.println();
+        System.out.println(TextWrapper.center("Thank you for playing!"));
+        System.out.println("==========================================" + TextWrapper.RESET);
         System.out.println();
     }
 
     private String banner(String title) {
-        int right = Constants.banner_width - Constants.banner_lead - title.length() - 2;
-        return "=".repeat(Constants.banner_lead) + " " + title + " " + "=".repeat(Math.max(0, right));
+        int right = Constants.BANNER_WIDTH - Constants.BANNER_LEAD - title.length() - 2;
+        return "=".repeat(Constants.BANNER_LEAD) + " " + title + " " + "=".repeat(Math.max(0, right));
     }
 
     private String rule() {
-        return "=".repeat(Constants.banner_width);
+        return "=".repeat(Constants.BANNER_WIDTH);
     }
 
     public boolean isGameOver() {
