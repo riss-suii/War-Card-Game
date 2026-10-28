@@ -1,3 +1,5 @@
+package com.svi.warcard.enums;
+
 /** Suits, declared lowest to highest: clubs, spades, hearts, diamonds. */
 public enum Suit {
     CLUBS("C"), SPADES("S"), HEARTS("H"), DIAMONDS("D");
@@ -8,9 +10,7 @@ public enum Suit {
         this.symbol = symbol;
     }
 
-    String getSymbol() {
-        return symbol;
-    }
+    public String getSymbol() { return symbol; }
 
     /** @return the matching suit, or null if the text is not a valid suit. */
     public static Suit fromSymbol(String text) {

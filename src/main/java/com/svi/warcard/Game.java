@@ -1,3 +1,12 @@
+package com.svi.warcard;
+
+import com.svi.warcard.io.TextWrapper;
+import com.svi.warcard.model.Deck;
+import com.svi.warcard.model.Player;
+import com.svi.warcard.model.Card;
+import com.svi.warcard.model.PlayedCard;
+import com.svi.warcard.util.Constants;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,7 +84,8 @@ public class Game {
     private void displayRound() {
         System.out.println(banner("ROUND " + roundNumber));
         for (PlayedCard pc : pile) {
-            System.out.println("Player " + pc.owner().getId() + ": " + pc.cardPlayed());
+            System.out.println("Player " + pc.owner().getId() + ": "
+                    + TextWrapper.colorize(pc.cardPlayed().toString()));
         }
     }
 

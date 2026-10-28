@@ -1,3 +1,5 @@
+package com.svi.warcard.util;
+
 public final class Constants {
     public static final int total_cards = 52;
     public static final int min_players = 2;

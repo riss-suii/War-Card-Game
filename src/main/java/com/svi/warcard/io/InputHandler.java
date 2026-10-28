@@ -1,3 +1,7 @@
+package com.svi.warcard.io;
+
+import com.svi.warcard.util.Constants;
+
 import java.util.Scanner;
 
 public class InputHandler {
@@ -38,23 +42,7 @@ public class InputHandler {
         return n;
     }
 
-    public String promptFileName() {
-        String name;
-        do {
-            System.out.println("Please enter the name of the deck file:");
-            name = scanner.nextLine().trim();
-            if (name.isEmpty()) {
-                System.out.println("File name cannot be empty.");
-            }
-        } while (name.isEmpty());
-        return name;
-    }
-
-    boolean promptRetryLoad() {
-        return askYesNo("Would you like to try another file? (Y/N)");
-    }
-
-    boolean promptPlayAgain() {
+    public boolean promptPlayAgain() {
         return askYesNo("Do you want to play again? (Y/N)");
     }
 

@@ -1,3 +1,5 @@
+package com.svi.warcard.enums;
+
 /** Ranks, declared lowest to highest so ordinal() gives the card strength. */
 public enum Rank {
     TWO("2"), THREE("3"), FOUR("4"), FIVE("5"), SIX("6"), SEVEN("7"),
@@ -6,13 +8,9 @@ public enum Rank {
 
     private final String symbol;
 
-    Rank(String symbol) {
-        this.symbol = symbol;
-    }
+    Rank(String symbol) { this.symbol = symbol; }
 
-    String getSymbol() {
-        return symbol;
-    }
+    public String getSymbol() { return symbol; }
 
     /** @return the matching rank, or null if the text is not a valid rank. */
     public static Rank fromSymbol(String text) {

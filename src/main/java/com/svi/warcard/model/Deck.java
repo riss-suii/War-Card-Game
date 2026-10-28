@@ -1,3 +1,7 @@
+package com.svi.warcard.model;
+
+import com.svi.warcard.io.TextWrapper;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,9 +59,7 @@ public class Deck {
         TextWrapper.print("", items, ",", "");
     }
 
-    public int size() {
-        return cards.size();
-    }
+    public int size() { return cards.size(); }
     public boolean isEmpty() {
         return cards.isEmpty();
     }

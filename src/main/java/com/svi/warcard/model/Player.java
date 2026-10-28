@@ -1,3 +1,7 @@
+package com.svi.warcard.model;
+
+import com.svi.warcard.io.TextWrapper;
+
 import java.util.LinkedList;
 import java.util.ArrayList;
 import java.util.List;
