@@ -51,14 +51,14 @@ public class FileLoader {
                             message = "Invalid file format.";
                         } else if (targetDeck.contains(newCard)) {
                             message = "Duplicate card detected.";
-                        } else if (targetDeck.size() == Constants.total_cards) {
+                        } else if (targetDeck.size() == Constants.TOTAL_CARDS) {
                             message = "Invalid number of cards in the deck.";
                         } else {
                             targetDeck.addCard(newCard);
                         }
                     }
                 }
-                if (message.isEmpty() && targetDeck.size() != Constants.total_cards) {
+                if (message.isEmpty() && targetDeck.size() != Constants.TOTAL_CARDS) {
                     message = "Invalid number of cards in the deck.";
                 }
                 return message;

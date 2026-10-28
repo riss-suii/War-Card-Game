@@ -21,7 +21,7 @@ public class Card {
     /** Round display format, e.g. ♥A-H. */
     @Override
     public String toString() {
-        return suitIcon() + rank.getSymbol() + "-" + suit.getSymbol();
+        return suitIcon() + suit.getSymbol() + "-" + rank.getSymbol();
     }
 
     /** File / deck display format, e.g. ♥H-A. */

@@ -20,13 +20,14 @@ public class InputHandler {
         int n;
         do {
             System.out.println("Please enter your desired number of players ("
-                    + Constants.min_players + "-" + Constants.max_players + "):");
+                    + Constants.MIN_PLAYERS + "-" + Constants.MAX_PLAYERS + "):");
             n = readInt();
-            if (n < Constants.min_players || n > Constants.max_players) {
-                System.out.println("Invalid number of players. Please enter a number between "
-                        + Constants.min_players + " and " + Constants.max_players + ".");
+            if (n < Constants.MIN_PLAYERS || n > Constants.MAX_PLAYERS) {
+                System.out.println(TextWrapper.RED + "⚠ Invalid number of players. Please enter a number between "
+                        + Constants.MIN_PLAYERS + " and " + Constants.MAX_PLAYERS + "." + TextWrapper.RESET);
+                System.out.println(" ");
             }
-        } while (n < Constants.min_players || n > Constants.max_players);
+        } while (n < Constants.MIN_PLAYERS || n > Constants.MAX_PLAYERS);
         return n;
     }
 
@@ -36,7 +37,8 @@ public class InputHandler {
             System.out.println("Please enter your desired number of shuffles:");
             n = readInt();
             if (n <= 0) {
-                System.out.println("Invalid number of shuffles. Please enter a whole number greater than 0.");
+                System.out.println(TextWrapper.RED + "⚠ Invalid number of shuffles. Please enter a whole number greater than 0." + TextWrapper.RESET);
+                System.out.println(" ");
             }
         } while (n <= 0);
         return n;
@@ -50,7 +52,7 @@ public class InputHandler {
         System.out.println(question);
         char choice = readChoice();
         while (choice != 'Y' && choice != 'N') {
-            System.out.println("Invalid choice. Please enter Y or N.");
+            System.out.println(TextWrapper.RED + "⚠ Invalid choice. Please enter Y or N." + TextWrapper.RESET);
             choice = readChoice();
         }
         return choice == 'Y';
