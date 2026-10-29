@@ -90,7 +90,7 @@ public class Game {
 
     private void displayStatus(Player winner, List<Player> outPlayers) {
         System.out.println();
-        System.out.println(TextWrapper.YELLOW + "\uD83C\uDFC5 Player " + winner.getId() + TextWrapper.RESET);
+        System.out.println(TextWrapper.ORANGE + "\uD83D\uDC51 Player " + winner.getId() + TextWrapper.RESET);
         winner.displayHand("Winner's Deck: ");
         if (!outPlayers.isEmpty()) {
             System.out.println();
@@ -103,12 +103,13 @@ public class Game {
     }
 
     void displayGameOver() {
-        System.out.println(TextWrapper.CYAN + banner("👑 VICTORY 👑"));
+        System.out.println(TextWrapper.CYAN + banner("\uD83C\uDFC6 VICTORY \uD83C\uDFC6") + TextWrapper.RESET);
         System.out.println();
-        System.out.println(TextWrapper.center("PLAYER " + getWinner().getId() + " WINS!"));
+        System.out.println(TextWrapper.ORANGE + TextWrapper.center("PLAYER " + getWinner().getId() + " WINS!"));
         System.out.println();
-        System.out.println(TextWrapper.center("Thank you for playing!\n"));
-        System.out.println(rule() + TextWrapper.RESET);
+        System.out.println(TextWrapper.center("Thank you for playing!") + TextWrapper.RESET);
+        System.out.println();
+        System.out.println(TextWrapper.CYAN + rule() + TextWrapper.RESET);
         System.out.println();
     }
 

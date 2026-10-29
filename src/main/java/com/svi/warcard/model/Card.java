@@ -3,7 +3,7 @@ package com.svi.warcard.model;
 import com.svi.warcard.enums.Rank;
 import com.svi.warcard.enums.Suit;
 
-public class Card {
+public class Card implements Comparable<Card> {
     private final Rank rank;
     private final Suit suit;
 
@@ -12,13 +12,14 @@ public class Card {
         this.suit = suit;
     }
 
+    @Override
     public int compareTo(Card other) {
         int cmp = rank.compareTo(other.rank);
         if (cmp != 0) return cmp;
         return suit.compareTo(other.suit);
     }
 
-    /** Round display format, e.g. ♥A-H. */
+    /** Display format, e.g. ♥H-A. */
     @Override
     public String toString() {
         return suitIcon() + suit.getSymbol() + "-" + rank.getSymbol();

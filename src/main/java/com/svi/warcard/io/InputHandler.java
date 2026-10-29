@@ -8,18 +8,18 @@ public class InputHandler {
     private static final Scanner scanner = new Scanner(System.in);
 
     public static void showIntro() {
-        System.out.println("================ WELCOME TO THE WAR CARD GAME =================");
+        System.out.println(TextWrapper.ORANGE + "================ WELCOME TO THE WAR CARD GAME =================");
         System.out.println("Game Mechanics:");
         System.out.println("1. Each round every player plays their top card.");
         System.out.println("2. The highest card wins all cards played that round.");
         System.out.println("3. A player with no cards left is eliminated.");
-        System.out.println("===============================================================");
+        System.out.println("===============================================================" + TextWrapper.RESET);
     }
 
     public static int promptNumPlayers() {
         int n;
         do {
-            System.out.println("Please enter your desired number of players ("
+            System.out.println(TextWrapper.CYAN + "Please enter your desired number of players ("
                     + Constants.MIN_PLAYERS + "-" + Constants.MAX_PLAYERS + "):");
             n = readInt();
             if (n < Constants.MIN_PLAYERS || n > Constants.MAX_PLAYERS) {
@@ -34,7 +34,7 @@ public class InputHandler {
     public static int promptNumShuffles() {
         int n;
         do {
-            System.out.println("Please enter your desired number of shuffles:");
+            System.out.println("Please enter your desired number of shuffles:" + TextWrapper.RESET);
             n = readInt();
             if (n <= 0) {
                 System.out.println(TextWrapper.RED + "⚠ Invalid number of shuffles. Please enter a whole number greater than 0." + TextWrapper.RESET);
@@ -45,7 +45,7 @@ public class InputHandler {
     }
 
     public static boolean promptPlayAgain() {
-        System.out.println("Do you want to play again? (Y/N)");
+        System.out.println(TextWrapper.ORANGE + "Do you want to play again? (Y/N)");
         char choice = readChoice();
         while (choice != 'Y' && choice != 'N') {
             System.out.println(TextWrapper.RED + "⚠ Invalid choice. Please enter Y or N." + TextWrapper.RESET);
