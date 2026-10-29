@@ -60,13 +60,6 @@ public class FileLoader {
         StringTokenizer tokenizer = new StringTokenizer(token, "-");
         if (tokenizer.countTokens() != 2) {
             throw new IllegalArgumentException("Invalid file format.");
-    }
-
-    /** @return the parsed card, or null when the token is not a valid Suit-Rank card. */
-    private Card parseCard(String token) {
-        StringTokenizer tokenizer = new StringTokenizer(token, "-");
-        if (tokenizer.countTokens() != 2) {
-            throw new IllegalArgumentException("Invalid file format.");
         }
         Suit suit = Suit.fromSymbol(tokenizer.nextToken());
         Rank rank = Rank.fromSymbol(tokenizer.nextToken());
