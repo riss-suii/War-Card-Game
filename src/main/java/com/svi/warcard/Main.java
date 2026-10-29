@@ -14,7 +14,6 @@ public class Main {
         FileLoader loader = new FileLoader();
 
         InputHandler.showIntro();
-
         boolean finished = false;
 
         try {

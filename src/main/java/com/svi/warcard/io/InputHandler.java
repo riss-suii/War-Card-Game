@@ -20,7 +20,7 @@ public class InputHandler {
         int n;
         do {
             System.out.println(TextWrapper.CYAN + "Please enter your desired number of players ("
-                    + Constants.MIN_PLAYERS + "-" + Constants.MAX_PLAYERS + "):");
+                    + Constants.MIN_PLAYERS + "-" + Constants.MAX_PLAYERS + "):" + TextWrapper.RESET);
             n = readInt();
             if (n < Constants.MIN_PLAYERS || n > Constants.MAX_PLAYERS) {
                 System.out.println(TextWrapper.RED + "⚠ Invalid number of players. Please enter a number between "
@@ -34,13 +34,15 @@ public class InputHandler {
     public static int promptNumShuffles() {
         int n;
         do {
-            System.out.println("Please enter your desired number of shuffles:" + TextWrapper.RESET);
+            System.out.println(TextWrapper.CYAN + "Please enter your desired number of shuffles (1-"
+                    + Constants.MAX_SHUFFLES + "):" + TextWrapper.RESET);
             n = readInt();
-            if (n <= 0) {
-                System.out.println(TextWrapper.RED + "⚠ Invalid number of shuffles. Please enter a whole number greater than 0." + TextWrapper.RESET);
+            if (n < 1 || n > Constants.MAX_SHUFFLES) {
+                System.out.println(TextWrapper.RED + "⚠ Invalid number of shuffles. Please enter a whole number between 1 and "
+                        + Constants.MAX_SHUFFLES + "." + TextWrapper.RESET);
                 System.out.println(" ");
             }
-        } while (n <= 0);
+        } while (n < 1 || n > Constants.MAX_SHUFFLES);
         return n;
     }
 
