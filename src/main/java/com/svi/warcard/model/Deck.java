@@ -39,7 +39,7 @@ public class Deck {
             shuffled.add(cards.get(half + k));
         }
         if (cards.size() % 2 == 1) {
-            shuffled.add(cards.get(cards.size() - 1));
+            shuffled.add(cards.getLast());
         }
         cards = shuffled;
     }
@@ -54,7 +54,7 @@ public class Deck {
     public void display() {
         List<String> items = new ArrayList<>();
         for (Card c : cards) {
-            items.add(c.fileFormat());
+            items.add(c.toString());   // was c.fileFormat()
         }
         TextWrapper.print("", items, ",", "");
     }

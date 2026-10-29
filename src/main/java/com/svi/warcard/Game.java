@@ -3,7 +3,6 @@ package com.svi.warcard;
 import com.svi.warcard.io.TextWrapper;
 import com.svi.warcard.model.Deck;
 import com.svi.warcard.model.Player;
-import com.svi.warcard.model.Card;
 import com.svi.warcard.model.PlayedCard;
 import com.svi.warcard.util.Constants;
 
@@ -36,20 +35,22 @@ public class Game {
         roundNumber++;
         pile.clear();
         for (Player p : players) {
-            if (!p.isEliminated()) {
+            if (p.isActive()) {
                 pile.add(new PlayedCard(p, p.playTopCard()));
             }
         }
         displayRound();
-        PlayedCard winner = determineWinner();
-        winner.owner().collectCards(cardsWinnerFirst(winner));
+
+        PlayedCard winner = determineRoundWinner();
+        awardPile(winner);
+
         List<Player> outPlayers = removeEliminatedPlayers();
         displayStatus(winner.owner(), outPlayers);
     }
 
-    /** Highest card wins; on a tie the earlier play wins. */
-    private PlayedCard determineWinner() {
-        PlayedCard best = pile.get(0);
+    /** Highest card wins. Cards are unique, so there are no ties. */
+    private PlayedCard determineRoundWinner() {
+        PlayedCard best = pile.getFirst();
         for (PlayedCard pc : pile) {
             if (pc.cardPlayed().compareTo(best.cardPlayed()) > 0) {
                 best = pc;
@@ -58,22 +59,21 @@ public class Game {
         return best;
     }
 
-    /** Winning card first, then the rest in play order. */
-    private List<Card> cardsWinnerFirst(PlayedCard winner) {
-        List<Card> cards = new ArrayList<>();
-        cards.add(winner.cardPlayed());
+    /** Winner takes every card played: their own first, then the rest in play order. */
+    private void awardPile(PlayedCard winner) {
+        Player owner = winner.owner();
+        owner.addToHand(winner.cardPlayed());
         for (PlayedCard pc : pile) {
             if (pc != winner) {
-                cards.add(pc.cardPlayed());
+                owner.addToHand(pc.cardPlayed());
             }
         }
-        return cards;
     }
 
     private List<Player> removeEliminatedPlayers() {
         List<Player> out = new ArrayList<>();
         for (Player p : players) {
-            if (!p.isEliminated() && !p.hasCards()) {
+            if (p.isActive() && !p.hasCards()) {
                 p.eliminate();
                 out.add(p);
             }
@@ -91,12 +91,12 @@ public class Game {
 
     private void displayStatus(Player winner, List<Player> outPlayers) {
         System.out.println();
-        System.out.println("Round Winner: Player " + winner.getId());
-        winner.displayHand("Winner's Deck: ");
+        System.out.println(TextWrapper.YELLOW + "Round Winner: Player " + winner.getId() + " ⭐");
+        winner.displayHand("Winner's Deck: " + TextWrapper.RESET);
         if (!outPlayers.isEmpty()) {
             System.out.println();
             for (Player p : outPlayers) {
-                System.out.println("Player " + p.getId() + " has been eliminated.");
+                System.out.println(TextWrapper.RED + "Player " + p.getId() + " has been eliminated." + TextWrapper.RESET);
             }
         }
         System.out.println(rule());
@@ -129,7 +129,7 @@ public class Game {
 
     Player getWinner() {
         for (Player p : players) {
-            if (!p.isEliminated()) {
+            if (p.isActive()) {
                 return p;
             }
         }
@@ -139,7 +139,7 @@ public class Game {
     private int countActivePlayers() {
         int total = 0;
         for (Player p : players) {
-            if (!p.isEliminated()) {
+            if (p.isActive()) {
                 total++;
             }
         }

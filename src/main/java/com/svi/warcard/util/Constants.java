@@ -7,5 +7,4 @@ public final class Constants {
     public static final int BANNER_WIDTH = 76;
     public static final int BANNER_LEAD = 31;
 
-    private Constants() { }
 }
