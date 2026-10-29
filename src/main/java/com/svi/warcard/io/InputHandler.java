@@ -5,9 +5,9 @@ import com.svi.warcard.util.Constants;
 import java.util.Scanner;
 
 public class InputHandler {
-    private final Scanner scanner = new Scanner(System.in);
+    private static final Scanner scanner = new Scanner(System.in);
 
-    public void showIntro() {
+    public static void showIntro() {
         System.out.println("================ WELCOME TO THE WAR CARD GAME =================");
         System.out.println("Game Mechanics:");
         System.out.println("1. Each round every player plays their top card.");
@@ -16,7 +16,7 @@ public class InputHandler {
         System.out.println("===============================================================");
     }
 
-    public int promptNumPlayers() {
+    public static int promptNumPlayers() {
         int n;
         do {
             System.out.println("Please enter your desired number of players ("
@@ -31,7 +31,7 @@ public class InputHandler {
         return n;
     }
 
-    public int promptNumShuffles() {
+    public static int promptNumShuffles() {
         int n;
         do {
             System.out.println("Please enter your desired number of shuffles:");
@@ -44,12 +44,8 @@ public class InputHandler {
         return n;
     }
 
-    public boolean promptPlayAgain() {
-        return askYesNo("Do you want to play again? (Y/N)");
-    }
-
-    private boolean askYesNo(String question) {
-        System.out.println(question);
+    public static boolean promptPlayAgain() {
+        System.out.println("Do you want to play again? (Y/N)");
         char choice = readChoice();
         while (choice != 'Y' && choice != 'N') {
             System.out.println(TextWrapper.RED + "⚠ Invalid choice. Please enter Y or N." + TextWrapper.RESET);
@@ -58,13 +54,13 @@ public class InputHandler {
         return choice == 'Y';
     }
 
-    private char readChoice() {
+    private static char readChoice() {
         String line = scanner.nextLine().trim();
         return line.isEmpty() ? ' ' : Character.toUpperCase(line.charAt(0));
     }
 
     /** Reads an integer; anything that is not a whole number counts as invalid (returns -1). */
-    private int readInt() {
+    private static int readInt() {
         String line = scanner.nextLine().trim();
         try {
             return Integer.parseInt(line);

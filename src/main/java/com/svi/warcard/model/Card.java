@@ -24,11 +24,6 @@ public class Card {
         return suitIcon() + suit.getSymbol() + "-" + rank.getSymbol();
     }
 
-    /** File / deck display format, e.g. ♥H-A. */
-    public String fileFormat() {
-        return suitIcon() + suit.getSymbol() + "-" + rank.getSymbol();
-    }
-
     private String suitIcon() {
         return switch (suit.getSymbol()) {
             case "D" -> "♦";

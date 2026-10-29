@@ -11,10 +11,9 @@ import java.util.NoSuchElementException;
 
 public class Main {
     static void main() {
-        InputHandler userInput = new InputHandler();
         FileLoader loader = new FileLoader();
 
-        userInput.showIntro();
+        InputHandler.showIntro();
         boolean finished = false;
 
         try {
@@ -24,8 +23,8 @@ public class Main {
                     System.out.println("Exiting program.");
                     finished = true;
                 } else {
-                    int numPlayers = userInput.promptNumPlayers();
-                    int numShuffles = userInput.promptNumShuffles();
+                    int numPlayers = InputHandler.promptNumPlayers();
+                    int numShuffles = InputHandler.promptNumShuffles();
                     System.out.println();
                     System.out.println("Initial Deck:");
                     gameDeck.display();
@@ -42,7 +41,7 @@ public class Main {
                     }
                     game.displayGameOver();
 
-                    if (!userInput.promptPlayAgain()) {
+                    if (!InputHandler.promptPlayAgain()) {
                         finished = true;
                     }
                 }
