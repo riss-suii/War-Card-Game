@@ -2,31 +2,18 @@ package com.svi.warcard.model;
 
 import com.svi.warcard.io.TextWrapper;
 
-<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.LinkedList;
-=======
-import java.util.LinkedList;
-import java.util.ArrayList;
->>>>>>> master
 import java.util.List;
 
 public class Player {
     private final int id;
     private final LinkedList<Card> hand = new LinkedList<>();
-<<<<<<< HEAD
     private boolean active;
 
     public Player(int playerId) {
         this.id = playerId;
         this.active = true;
-=======
-    private boolean eliminated;
-
-    public Player(int playerId) {
-        this.id = playerId;
-        this.eliminated = false;
->>>>>>> master
     }
 
     public void addToHand(Card newCard) {
@@ -34,17 +21,7 @@ public class Player {
     }
 
     public Card playTopCard() {
-<<<<<<< HEAD
         return hand.removeFirst();
-=======
-        return hand.remove(0);
-    }
-
-    public void collectCards(List<Card> cardList) {
-        for(Card card : cardList) {
-            addToHand(card);
-        }
->>>>>>> master
     }
 
     public boolean hasCards() {
@@ -52,19 +29,11 @@ public class Player {
     }
 
     public void eliminate() {
-<<<<<<< HEAD
         active = false;
     }
 
     public boolean isActive() {
         return active;
-=======
-        eliminated = true;
-    }
-
-    public boolean isEliminated() {
-        return eliminated;
->>>>>>> master
     }
 
     public int getId() {
@@ -79,8 +48,4 @@ public class Player {
         TextWrapper.print(label, items, ",", " ");
     }
 
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> master
