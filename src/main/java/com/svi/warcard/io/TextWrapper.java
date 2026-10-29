@@ -46,7 +46,7 @@ public class TextWrapper {
     }
 
     public static String center(String text) {
-        int pad = Math.max(0, (42 - text.length()) / 2);
+        int pad = Math.max(0, (Constants.BANNER_WIDTH - text.length()) / 2);
         return " ".repeat(pad) + text;
     }
 
