@@ -1,6 +1,7 @@
 package com.svi.warcard.io;
 
 import com.svi.warcard.util.Constants;
+import com.svi.warcard.util.TextWrapper;
 
 import java.util.Scanner;
 

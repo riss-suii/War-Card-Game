@@ -1,6 +1,6 @@
 package com.svi.warcard.model;
 
-import com.svi.warcard.io.TextWrapper;
+import com.svi.warcard.util.TextWrapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +16,7 @@ public class Deck {
         cards.add(card);
     }
 
+    // for checking of card duplicates
     public boolean contains(Card target) {
         for (Card card : cards) {
             if (card.compareTo(target) == 0) {
@@ -38,9 +39,6 @@ public class Deck {
             shuffled.add(cards.get(k));
             shuffled.add(cards.get(half + k));
         }
-        if (cards.size() % 2 == 1) {
-            shuffled.add(cards.getLast());
-        }
         cards = shuffled;
     }
 
@@ -54,7 +52,7 @@ public class Deck {
     public void display() {
         List<String> items = new ArrayList<>();
         for (Card c : cards) {
-            items.add(c.toString());   // was c.fileFormat()
+            items.add(c.toString());
         }
         TextWrapper.print("", items, ",", "");
     }

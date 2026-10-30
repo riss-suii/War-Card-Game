@@ -1,6 +1,4 @@
-package com.svi.warcard.io;
-
-import com.svi.warcard.util.Constants;
+package com.svi.warcard.util;
 
 import java.util.List;
 
@@ -11,11 +9,6 @@ public class TextWrapper {
     public static final String CYAN = "\u001B[36m";
     public static final String ORANGE = "\u001B[38;2;255;165;0m";
 
-    /**
-     * Prints items separated by 'separator' (plus 'gap'), wrapping lines at the banner width.
-     * Continuation lines are indented to line up under the first item.
-     * Diamonds and hearts are printed in red.
-     */
     public static void print(String prefix, List<String> items, String separator, String gap) {
         String indent = " ".repeat(prefix.length());
         StringBuilder line = new StringBuilder(prefix); // text with colors

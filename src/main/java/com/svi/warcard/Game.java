@@ -1,6 +1,6 @@
 package com.svi.warcard;
 
-import com.svi.warcard.io.TextWrapper;
+import com.svi.warcard.util.TextWrapper;
 import com.svi.warcard.model.Deck;
 import com.svi.warcard.model.Player;
 import com.svi.warcard.model.PlayedCard;

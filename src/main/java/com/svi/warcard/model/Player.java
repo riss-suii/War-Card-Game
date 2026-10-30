@@ -1,6 +1,6 @@
 package com.svi.warcard.model;
 
-import com.svi.warcard.io.TextWrapper;
+import com.svi.warcard.util.TextWrapper;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
