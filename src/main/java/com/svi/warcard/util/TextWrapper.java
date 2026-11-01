@@ -8,35 +8,55 @@ public class TextWrapper {
     public static final String RESET = "\u001B[0m";
     public static final String CYAN = "\u001B[36m";
     public static final String ORANGE = "\u001B[38;2;255;165;0m";
+    public static final String BOLD = "\u001B[1m";
 
+    /**
+     * Prints items in aligned columns. The separator sits right after each item,
+     * padding goes after the separator, and wrapped rows are indented under the prefix.
+     */
     public static void print(String prefix, List<String> items, String separator, String gap) {
+        if (items.isEmpty()) {
+            System.out.println(prefix);
+            return;
+        }
+
         String indent = " ".repeat(prefix.length());
-        StringBuilder line = new StringBuilder(prefix); // text with colors
-        int width = prefix.length();                     // visible width only
-        boolean lineHasItem = false;
+        int itemWidth = items.stream().mapToInt(String::length).max().orElse(0);
+        int cellWidth = itemWidth + separator.length();          // item + comma
+        int available = Constants.BANNER_WIDTH - prefix.length();
+        int cols = Math.max(1, (available + gap.length()) / (cellWidth + gap.length()));
 
         for (int i = 0; i < items.size(); i++) {
             String item = items.get(i);
-            // Every item except the last is followed by a separator, which must also fit.
-            int extra = (i < items.size() - 1) ? separator.length() : 0;
+            boolean last = i == items.size() - 1;
+            boolean rowEnd = (i % cols == cols - 1) || last;
+            String tail = last ? "" : separator;                 // no comma after the final item
 
-            if (!lineHasItem) {
-                line.append(colorize(item));
-                width += item.length();
-                lineHasItem = true;
+            if (i % cols == 0) {
+                System.out.print(i == 0 ? prefix : indent);
+            }
+
+            if (rowEnd) {
+                System.out.println(colorize(item) + tail);       // no trailing spaces at row end
             } else {
-                int candidateWidth = width + separator.length() + gap.length() + item.length();
-                if (candidateWidth + extra <= Constants.BANNER_WIDTH) {
-                    line.append(separator).append(gap).append(colorize(item));
-                    width = candidateWidth;
-                } else {
-                    System.out.println(line + separator);
-                    line = new StringBuilder(indent).append(colorize(item));
-                    width = indent.length() + item.length();
-                }
+                // Pad using plain-text lengths so ANSI color codes don't break alignment.
+                int pad = cellWidth - item.length() - tail.length();
+                System.out.print(colorize(item) + tail + " ".repeat(pad) + gap);
             }
         }
-        System.out.println(line);
+    }
+
+    /** Centered title, always exactly BANNER_WIDTH wide. */
+    public static String banner(String title) {
+        String padded = " " + title + " ";
+        int total = Math.max(0, Constants.BANNER_WIDTH - padded.length());
+        int left = total / 2;
+        int right = total - left;
+        return "=".repeat(left) + padded + "=".repeat(right);
+    }
+
+    public static String rule() {
+        return "=".repeat(Constants.BANNER_WIDTH);
     }
 
     public static String center(String text) {
@@ -49,5 +69,3 @@ public class TextWrapper {
         return isRed ? RED + item + RESET : item;
     }
 }
-
-

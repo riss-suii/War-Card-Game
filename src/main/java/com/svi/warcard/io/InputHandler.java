@@ -9,12 +9,16 @@ public class InputHandler {
     private static final Scanner scanner = new Scanner(System.in);
 
     public static void showIntro() {
-        System.out.println(TextWrapper.ORANGE + "================ WELCOME TO THE WAR CARD GAME =================");
-        System.out.println("Game Mechanics:");
-        System.out.println("1. Each round every player plays their top card.");
-        System.out.println("2. The highest card wins all cards played that round.");
-        System.out.println("3. A player with no cards left is eliminated.");
-        System.out.println("===============================================================" + TextWrapper.RESET);
+        System.out.println(TextWrapper.ORANGE + "======================= WELCOME TO THE WAR CARD GAME =======================" + TextWrapper.RESET);
+        System.out.println(TextWrapper.BOLD + "                           ⚔  THE RULES OF WAR  ⚔");
+        System.out.println();
+        System.out.println("             ♠ THE DRAW    Each player plays their top card.");
+        System.out.println("             ♥ THE CLASH   The highest card wins the round.");
+        System.out.println("             ♦ THE SPOILS  The winner takes every card played.");
+        System.out.println("             ♣ THE FALL    No cards left means you're out.");
+        System.out.println();
+        System.out.println("                    Last warrior standing wins the war!" + TextWrapper.RESET);
+        System.out.println(TextWrapper.ORANGE + "============================================================================" + TextWrapper.RESET);
     }
 
     public static int promptNumPlayers() {

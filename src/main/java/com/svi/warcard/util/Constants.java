@@ -6,6 +6,5 @@ public final class Constants {
     public static final int MAX_PLAYERS = 8;
     public static final int MAX_SHUFFLES = 8;
     public static final int BANNER_WIDTH = 76;
-    public static final int BANNER_LEAD = 31;
 
 }

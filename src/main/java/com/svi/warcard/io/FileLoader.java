@@ -49,13 +49,15 @@ public class FileLoader {
                     throw new IllegalArgumentException("Duplicate card detected.");
                 }
                 if (deck.size() == Constants.TOTAL_CARDS) {
-                    throw new IllegalArgumentException("Invalid number of cards in the deck.");
+                    throw new IllegalArgumentException("Too many cards in the deck (expected exactly " + Constants.TOTAL_CARDS
+                            + ", but found more).");
                 }
                 deck.addCard(card);
             }
         }
         if (deck.size() != Constants.TOTAL_CARDS) {
-            throw new IllegalArgumentException("Invalid number of cards in the deck.");
+            throw new IllegalArgumentException("Invalid number of cards in the deck (found " + deck.size()
+                    + ", expected " + Constants.TOTAL_CARDS + ").");
         }
         return deck;
     }
@@ -63,12 +65,12 @@ public class FileLoader {
     private Card parseCard(String token) {
         StringTokenizer tokenizer = new StringTokenizer(token, "-");
         if (tokenizer.countTokens() != 2) {
-            throw new IllegalArgumentException("Invalid file format.");
+            throw new IllegalArgumentException("Invalid card format (expected SUIT-RANK, e.g. D-A).");
         }
         Suit suit = Suit.fromSymbol(tokenizer.nextToken());
         Rank rank = Rank.fromSymbol(tokenizer.nextToken());
         if (suit == null || rank == null) {
-            throw new IllegalArgumentException("Invalid file format.");
+            throw new IllegalArgumentException("Invalid card format (unknown suit or rank).");
         }
         return new Card(rank, suit);
     }
