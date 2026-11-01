@@ -52,7 +52,7 @@ public class InputHandler {
     }
 
     public static boolean promptPlayAgain() {
-        System.out.println(TextWrapper.ORANGE + "Do you want to play again? (Y/N)");
+        System.out.println(TextWrapper.ORANGE + "Do you want to play again? (Y/N)" + TextWrapper.RESET);
         char choice = readChoice();
         while (choice != 'Y' && choice != 'N') {
             System.out.println(TextWrapper.RED + "⚠ Invalid choice. Please enter Y or N." + TextWrapper.RESET);
@@ -62,8 +62,11 @@ public class InputHandler {
     }
 
     private static char readChoice() {
-        String line = scanner.nextLine().trim();
-        return line.isEmpty() ? ' ' : Character.toUpperCase(line.charAt(0));
+        String line;
+        do {
+            line = scanner.nextLine().trim();
+        } while (line.isEmpty());
+        return Character.toUpperCase(line.charAt(0));
     }
 
     /** Reads an integer; anything that is not a whole number counts as invalid (returns -1). */
