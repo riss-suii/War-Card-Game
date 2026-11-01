@@ -46,7 +46,7 @@ public class TextWrapper {
         }
     }
 
-
+    /** Centered title, always exactly BANNER_WIDTH wide. */
     public static String banner(String title) {
         String padded = " " + title + " ";
         int total = Math.max(0, Constants.BANNER_WIDTH - padded.length());
