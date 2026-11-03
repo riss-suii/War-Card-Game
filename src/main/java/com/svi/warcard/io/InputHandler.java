@@ -55,13 +55,13 @@ public class InputHandler {
         System.out.println(TextWrapper.ORANGE + "Do you want to play again? (Y/N)" + TextWrapper.RESET);
         while (true) {
             String answer = scanner.nextLine().trim().toUpperCase();
-            if (answer.equals("Y") || answer.equals("YES")) {
+            if (answer.equals("Y")) {
                 return true;
             }
-            if (answer.equals("N") || answer.equals("NO")) {
+            if (answer.equals("N")) {
                 return false;
             }
-            System.out.println(TextWrapper.RED + "⚠ Invalid choice. Please enter Y/N or Yes/No."
+            System.out.println(TextWrapper.RED + "⚠ Invalid choice. Please enter Y/N."
                     + TextWrapper.RESET);
         }
     }
