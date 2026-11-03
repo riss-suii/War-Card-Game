@@ -26,11 +26,9 @@ public class FileLoader {
                     new InputStreamReader(input, StandardCharsets.UTF_8))) {
                 return readCards(reader);
             }
-        } catch (IOException e) {
-            System.out.println("Error: File cannot be opened. Please check the input.txt file.");
-            return new Deck();
-        } catch (IllegalArgumentException e) {
-            System.out.println("Error: " + e.getMessage() + " Please check the input.txt file.");
+        } catch (IOException | IllegalArgumentException e) {
+            String reason = (e instanceof IOException) ? "File cannot be opened." : e.getMessage();
+            System.out.println("Error: " + reason + " Please check the input.txt file.");
             return new Deck();
         }
     }
