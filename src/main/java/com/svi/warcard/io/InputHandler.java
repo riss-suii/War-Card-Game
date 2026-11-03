@@ -28,7 +28,7 @@ public class InputHandler {
                     + Constants.MIN_PLAYERS + "-" + Constants.MAX_PLAYERS + "):" + TextWrapper.RESET);
             n = readInt();
             if (n < Constants.MIN_PLAYERS || n > Constants.MAX_PLAYERS) {
-                System.out.println(TextWrapper.RED + "⚠ Invalid number of players. Please enter a number between "
+                System.out.println(TextWrapper.RED + "⚠ Invalid input. Please enter a number between "
                         + Constants.MIN_PLAYERS + " and " + Constants.MAX_PLAYERS + "." + TextWrapper.RESET);
                 System.out.println(" ");
             }
@@ -43,7 +43,7 @@ public class InputHandler {
                     + Constants.MAX_SHUFFLES + "):" + TextWrapper.RESET);
             n = readInt();
             if (n < 1 || n > Constants.MAX_SHUFFLES) {
-                System.out.println(TextWrapper.RED + "⚠ Invalid number of shuffles. Please enter a whole number between 1 and "
+                System.out.println(TextWrapper.RED + "⚠ Invalid input. Please enter a whole number between 1 and "
                         + Constants.MAX_SHUFFLES + "." + TextWrapper.RESET);
                 System.out.println(" ");
             }
@@ -52,20 +52,19 @@ public class InputHandler {
     }
 
     public static boolean promptPlayAgain() {
-        System.out.println(TextWrapper.ORANGE + "Do you want to play again? (Y/N)");
-        char choice = readChoice();
-        while (choice != 'Y' && choice != 'N') {
-            System.out.println(TextWrapper.RED + "⚠ Invalid choice. Please enter Y or N." + TextWrapper.RESET);
-            choice = readChoice();
+        System.out.println(TextWrapper.ORANGE + "Do you want to play again? (Y/N)" + TextWrapper.RESET);
+        while (true) {
+            String answer = scanner.nextLine().trim().toUpperCase();
+            if (answer.equals("Y") || answer.equals("YES")) {
+                return true;
+            }
+            if (answer.equals("N") || answer.equals("NO")) {
+                return false;
+            }
+            System.out.println(TextWrapper.RED + "⚠ Invalid choice. Please enter Y/N or Yes/No."
+                    + TextWrapper.RESET);
         }
-        return choice == 'Y';
     }
-
-    private static char readChoice() {
-        String line = scanner.nextLine().trim();
-        return line.isEmpty() ? ' ' : Character.toUpperCase(line.charAt(0));
-    }
-
     /** Reads an integer; anything that is not a whole number counts as invalid (returns -1). */
     private static int readInt() {
         String line = scanner.nextLine().trim();

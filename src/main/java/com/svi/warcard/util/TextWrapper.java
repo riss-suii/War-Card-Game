@@ -5,11 +5,10 @@ import java.util.List;
 public class TextWrapper {
 
     public static final String RED = "\u001B[31m";
-    public static final String RESET = "\u001B[0m";
     public static final String CYAN = "\u001B[36m";
     public static final String ORANGE = "\u001B[38;2;255;165;0m";
     public static final String BOLD = "\u001B[1m";
-
+    public static final String RESET = "\u001B[0m";
     /**
      * Prints items in aligned columns. The separator sits right after each item,
      * padding goes after the separator, and wrapped rows are indented under the prefix.
