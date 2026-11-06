@@ -7,7 +7,6 @@ import com.svi.warcard.model.Deck;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 public class Main {
     static void main() {
@@ -48,9 +47,9 @@ public class Main {
                     }
                 }
             } while (!finished);
-        } catch (NoSuchElementException e) {
+        } catch (Exception e) {
             System.out.println();
-            System.out.println("Input ended. Exiting program.");
+            System.out.println("An unexpected error occurred: " + e.getMessage());
         }
     }
 }
