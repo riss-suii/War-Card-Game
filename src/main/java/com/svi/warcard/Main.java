@@ -12,11 +12,11 @@ public class Main {
     static void main() {
         FileLoader loader = new FileLoader();
 
-        InputHandler.showIntro();
         boolean finished = false;
 
         try {
             do {
+                InputHandler.showIntro();
                 Deck gameDeck = loader.loadDeck();
                 if (gameDeck.isEmpty()) {
                     System.out.println("Exiting program.");
