@@ -14,9 +14,9 @@ public enum Suit {
 
     /** @return the matching suit, or null if the text is not a valid suit. */
     public static Suit fromSymbol(String text) {
-        for (Suit s : values()) {
-            if (s.symbol.equals(text)) {
-                return s;
+        for (Suit currentSuit : values()) {
+            if (currentSuit.symbol.equals(text)) {
+                return currentSuit;
             }
         }
         return null;

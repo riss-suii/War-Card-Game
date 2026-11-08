@@ -42,8 +42,8 @@ public class Player {
 
     public void displayHand(String label) {
         List<String> items = new ArrayList<>();
-        for (Card card : hand) {
-            items.add(card.toString());
+        for (Card currentCard : hand) {
+            items.add(currentCard.toString());
         }
         TextWrapper.print(label, items, ",", " ");
     }

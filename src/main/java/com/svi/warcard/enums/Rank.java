@@ -14,9 +14,9 @@ public enum Rank {
 
     /** @return the matching rank, or null if the text is not a valid rank. */
     public static Rank fromSymbol(String text) {
-        for (Rank r : values()) {
-            if (r.symbol.equals(text)) {
-                return r;
+        for (Rank currentRank : values()) {
+            if (currentRank.symbol.equals(text)) {
+                return currentRank;
             }
         }
         return null;

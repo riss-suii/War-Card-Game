@@ -32,9 +32,9 @@ public class Game {
     public void playRound() {
         roundNumber++;
         pile.clear();
-        for (Player p : players) {
-            if (p.isActive()) {
-                pile.add(new PlayedCard(p, p.playTopCard()));
+        for (Player currentPlayer : players) {
+            if (currentPlayer.isActive()) {
+                pile.add(new PlayedCard(currentPlayer, currentPlayer.playTopCard()));
             }
         }
         displayRound();
@@ -49,9 +49,9 @@ public class Game {
     /** Highest card wins. Cards are unique, so there are no ties. */
     private PlayedCard determineRoundWinner() {
         PlayedCard best = pile.getFirst();
-        for (PlayedCard pc : pile) {
-            if (pc.cardPlayed().compareTo(best.cardPlayed()) > 0) {
-                best = pc;
+        for (PlayedCard currentCard : pile) {
+            if (currentCard.cardPlayed().compareTo(best.cardPlayed()) > 0) {
+                best = currentCard;
             }
         }
         return best;
@@ -61,19 +61,19 @@ public class Game {
     private void awardPile(PlayedCard winner) {
         Player owner = winner.owner();
         owner.addToHand(winner.cardPlayed());
-        for (PlayedCard pc : pile) {
-            if (pc != winner) {
-                owner.addToHand(pc.cardPlayed());
+        for (PlayedCard currentCard : pile) {
+            if (currentCard != winner) {
+                owner.addToHand(currentCard.cardPlayed());
             }
         }
     }
 
     private List<Player> removeEliminatedPlayers() {
         List<Player> out = new ArrayList<>();
-        for (Player p : players) {
-            if (p.isActive() && !p.hasCards()) {
-                p.eliminate();
-                out.add(p);
+        for (Player currentPlayer : players) {
+            if (currentPlayer.isActive() && !currentPlayer.hasCards()) {
+                currentPlayer.eliminate();
+                out.add(currentPlayer);
             }
         }
         return out;
@@ -81,9 +81,9 @@ public class Game {
 
     private void displayRound() {
         System.out.println(TextWrapper.banner("ROUND " + roundNumber));
-        for (PlayedCard pc : pile) {
-            System.out.println("Player " + pc.owner().getId() + ": "
-                    + TextWrapper.colorize(pc.cardPlayed().toString()));
+        for (PlayedCard currentCard : pile) {
+            System.out.println("Player " + currentCard.owner().getId() + ": "
+                    + TextWrapper.colorize(currentCard.cardPlayed().toString()));
         }
     }
 
@@ -93,8 +93,8 @@ public class Game {
         winner.displayHand("Winner's Deck: ");
         if (!outPlayers.isEmpty()) {
             System.out.println();
-            for (Player p : outPlayers) {
-                System.out.println(TextWrapper.RED + "\uD83D\uDC80 Player " + p.getId() + " has been eliminated." + TextWrapper.RESET);
+            for (Player currentPlayer : outPlayers) {
+                System.out.println(TextWrapper.RED + "\uD83D\uDC80 Player " + currentPlayer.getId() + " has been eliminated." + TextWrapper.RESET);
             }
         }
         System.out.println(TextWrapper.rule());
@@ -117,9 +117,9 @@ public class Game {
     }
 
     Player getWinner() {
-        for (Player p : players) {
-            if (p.isActive()) {
-                return p;
+        for (Player currentPlayer : players) {
+            if (currentPlayer.isActive()) {
+                return currentPlayer;
             }
         }
         return null;
@@ -127,8 +127,8 @@ public class Game {
 
     private int countActivePlayers() {
         int total = 0;
-        for (Player p : players) {
-            if (p.isActive()) {
+        for (Player currentPlayer : players) {
+            if (currentPlayer.isActive()) {
                 total++;
             }
         }

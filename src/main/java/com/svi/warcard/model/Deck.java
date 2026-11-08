@@ -18,8 +18,8 @@ public class Deck {
 
     // for checking of card duplicates
     public boolean contains(Card target) {
-        for (Card card : cards) {
-            if (card.compareTo(target) == 0) {
+        for (Card currentCard : cards) {
+            if (currentCard.compareTo(target) == 0) {
                 return true;
             }
         }
@@ -51,8 +51,8 @@ public class Deck {
 
     public void display() {
         List<String> items = new ArrayList<>();
-        for (Card c : cards) {
-            items.add(c.toString());
+        for (Card currentCard : cards) {
+            items.add(currentCard.toString());
         }
         TextWrapper.print("", items, ",", "");
     }
