@@ -8,11 +8,13 @@ public enum Rank {
 
     private final String symbol;
 
+    /** Creates a rank. */
     Rank(String symbol) { this.symbol = symbol; }
 
+    /** Gets the rank's text symbol. */
     public String getSymbol() { return symbol; }
 
-    /** @return the matching rank, or null if the text is not a valid rank. */
+    /** Looks up a rank by its symbol. */
     public static Rank fromSymbol(String text) {
         for (Rank currentRank : values()) {
             if (currentRank.symbol.equals(text)) {

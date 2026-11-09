@@ -6,13 +6,15 @@ public enum Suit {
 
     private final String symbol;
 
+    /** Creates a suit. */
     Suit(String symbol) {
         this.symbol = symbol;
     }
 
+    /** Gets the suit's letter. */
     public String getSymbol() { return symbol; }
 
-    /** @return the matching suit, or null if the text is not a valid suit. */
+    /** Looks up a suit by its letter. */
     public static Suit fromSymbol(String text) {
         for (Suit currentSuit : values()) {
             if (currentSuit.symbol.equals(text)) {

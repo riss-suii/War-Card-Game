@@ -5,9 +5,12 @@ import com.svi.warcard.util.TextWrapper;
 
 import java.util.Scanner;
 
+/** Handles all console input and the intro screen. */
+
 public class InputHandler {
     private static final Scanner scanner = new Scanner(System.in);
 
+    /** Prints the welcome banner and the rules of the game. */
     public static void showIntro() {
         System.out.println(TextWrapper.ORANGE + "======================= WELCOME TO THE WAR CARD GAME =======================" + TextWrapper.RESET);
         System.out.println(TextWrapper.BOLD + "                           ⚔  THE RULES OF WAR  ⚔");
@@ -21,6 +24,7 @@ public class InputHandler {
         System.out.println(TextWrapper.ORANGE + "============================================================================" + TextWrapper.RESET);
     }
 
+    /** Ask how many players will join, repeating until the answer is between 2-8. */
     public static int promptNumPlayers() {
         int n;
         do {
@@ -36,6 +40,7 @@ public class InputHandler {
         return n;
     }
 
+    /** Ask how many times the deck should be shuffled, repeating until the answer is 1-8. */
     public static int promptNumShuffles() {
         int n;
         do {
@@ -51,6 +56,7 @@ public class InputHandler {
         return n;
     }
 
+    /** Ask whether the user wants another game, repeating until the answer is Y or N. */
     public static boolean promptPlayAgain() {
         System.out.println(TextWrapper.ORANGE + "Do you want to play again? (Y/N)" + TextWrapper.RESET);
         while (true) {

@@ -5,18 +5,22 @@ import com.svi.warcard.util.TextWrapper;
 import java.util.ArrayList;
 import java.util.List;
 
+/** An ordered collection of cards that can be shuffled, dealt, and displayed. */
+
 public class Deck {
     private List<Card> cards;
 
+    /** Creates an empty deck. */
     public Deck() {
         cards = new ArrayList<>();
     }
 
+    /** Adds a card to the bottom of the deck. */
     public void addCard(Card card) {
         cards.add(card);
     }
 
-    // for checking of card duplicates
+    /** Checks whether a card is already in the deck (used to detect duplicates). */
     public boolean contains(Card target) {
         for (Card currentCard : cards) {
             if (currentCard.compareTo(target) == 0) {
@@ -26,12 +30,14 @@ public class Deck {
         return false;
     }
 
+    /** Shuffles the deck several times. */
     public void shuffle(int numShuffles) {
         for (int i = 1; i <= numShuffles; i++) {
             singleShuffle();
         }
     }
 
+    /** Performs one perfect out shuffle: splits the deck in half and interleave the halves, starting with the top half. */
     private void singleShuffle() {
         int half = cards.size() / 2;
         List<Card> shuffled = new ArrayList<>();
@@ -49,6 +55,7 @@ public class Deck {
         }
     }
 
+    /** Prints every card in the deck in aligned columns. */
     public void display() {
         List<String> items = new ArrayList<>();
         for (Card currentCard : cards) {
@@ -57,7 +64,9 @@ public class Deck {
         TextWrapper.print("", items, ",", "");
     }
 
+    /** Gets the number of the cards in the deck. */
     public int size() { return cards.size(); }
+    /** Checks whether the deck has no cards. */
     public boolean isEmpty() {
         return cards.isEmpty();
     }
