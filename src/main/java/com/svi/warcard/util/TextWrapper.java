@@ -2,8 +2,12 @@ package com.svi.warcard.util;
 
 import java.util.List;
 
-/** Console formatting helpers: ANSI colors, aligned column printing, and fixed-width banners. */
-
+/**
+ * Console formatting helpers: ANSI colors, aligned column printing, and fixed-width banners.
+ *
+ * @author Chariss Borlaza
+ * @since 1.0
+ */
 public class TextWrapper {
 
     public static final String RED = "\u001B[31m";
@@ -11,6 +15,7 @@ public class TextWrapper {
     public static final String ORANGE = "\u001B[38;2;255;165;0m";
     public static final String BOLD = "\u001B[1m";
     public static final String RESET = "\u001B[0m";
+
     /**
      * Prints items in aligned columns. The separator sits right after each item,
      * padding goes after the separator, and wrapped rows are indented under the prefix.
@@ -47,7 +52,9 @@ public class TextWrapper {
         }
     }
 
-    /** Builds a centered title, always exactly BANNER_WIDTH wide. */
+    /**
+     * Builds a centered title, always exactly BANNER_WIDTH wide.
+     */
     public static String banner(String title) {
         String padded = " " + title + " ";
         int total = Math.max(0, Constants.BANNER_WIDTH - padded.length());
@@ -56,18 +63,24 @@ public class TextWrapper {
         return "=".repeat(left) + padded + "=".repeat(right);
     }
 
-    /** Builds a divider line. */
+    /**
+     * Builds a divider line.
+     */
     public static String rule() {
         return "=".repeat(Constants.BANNER_WIDTH);
     }
 
-    /** Pads text on the left so it appears centered within the banner width. */
+    /**
+     * Pads text on the left so it appears centered within the banner width.
+     */
     public static String center(String text) {
         int pad = Math.max(0, (Constants.BANNER_WIDTH - text.length()) / 2);
         return " ".repeat(pad) + text;
     }
 
-    /** Colors the text red when it contains a red suit symbol (hearts or diamonds). */
+    /**
+     * Colors the text red when it contains a red suit symbol (hearts or diamonds).
+     */
     public static String colorize(String item) {
         boolean isRed = item.contains("♦") || item.contains("♥");
         return isRed ? RED + item + RESET : item;

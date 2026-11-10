@@ -13,13 +13,19 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.StringTokenizer;
 
-/** Loads and validates the deck from the resource file. */
-
+/**
+ * Loads and validates the deck from the resource file.
+ *
+ * @author Chariss Borlaza
+ * @since 1.0
+ */
 public class FileLoader {
 
     private static final String DECK_FILE = "input.txt";
 
-    /** Reads the deck file from the classpath. */
+    /**
+     * Reads the deck file from the classpath.
+     */
     public Deck loadDeck() {
         try (InputStream input = FileLoader.class.getClassLoader().getResourceAsStream(DECK_FILE)) {
             if (input == null) {
@@ -36,7 +42,9 @@ public class FileLoader {
         }
     }
 
-    /** Reads every card from the file and checks the deck rules: no duplicates and exactly 52 cards. */
+    /**
+     * Reads every card from the file and checks the deck rules: no duplicates and exactly 52 cards.
+     */
     private Deck readCards(BufferedReader reader) throws IOException {
         Deck deck = new Deck();
         String line;
@@ -64,7 +72,9 @@ public class FileLoader {
         return deck;
     }
 
-    /** Converts text such as D-A into a Card object. */
+    /**
+     * Converts text such as D-A into a Card object.
+     */
     private Card parseCard(String token) {
         StringTokenizer tokenizer = new StringTokenizer(token, "-");
         if (tokenizer.countTokens() != 2) {
