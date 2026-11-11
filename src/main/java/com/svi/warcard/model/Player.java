@@ -15,7 +15,7 @@ import java.util.List;
 public class Player {
     private final int id;
     private final LinkedList<Card> hand = new LinkedList<>();
-    private boolean active;
+    private final boolean active;
 
     /**
      * Creates an active player with an empty hand.
@@ -44,13 +44,6 @@ public class Player {
      */
     public boolean hasCards() {
         return !hand.isEmpty();
-    }
-
-    /**
-     * Checks whether the player is still in the game.
-     */
-    public void eliminate() {
-        active = false;
     }
 
     /**

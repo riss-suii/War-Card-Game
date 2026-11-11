@@ -67,7 +67,7 @@ public class Deck {
      */
     public void deal(List<Player> players) {
         for (int i = 0; i < cards.size(); i++) {
-            players.get(i % players.size()).addToHand(cards.get(i));
+            players.get(i % players.size()).addToHand(cards.removeFirst());
         }
     }
 

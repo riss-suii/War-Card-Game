@@ -70,8 +70,8 @@ public class InputHandler {
      * Ask whether the user wants another game, repeating until the answer is Y or N.
      */
     public static boolean promptPlayAgain() {
-        System.out.println(TextWrapper.ORANGE + "Do you want to play again? (Y/N)" + TextWrapper.RESET);
         while (true) {
+            System.out.println(TextWrapper.ORANGE + "Do you want to play again? (Y/N)" + TextWrapper.RESET);
             String answer = scanner.nextLine().trim().toUpperCase();
             if (answer.equals("Y")) {
                 return true;

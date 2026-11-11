@@ -91,7 +91,6 @@ public class Game {
         List<Player> out = new ArrayList<>();
         for (Player currentPlayer : players) {
             if (currentPlayer.isActive() && !currentPlayer.hasCards()) {
-                currentPlayer.eliminate();
                 out.add(currentPlayer);
             }
         }
