@@ -26,7 +26,7 @@ public class FileLoader {
     /**
      * Reads the deck file from the classpath.
      */
-    public Deck loadDeck() {
+    public Deck loadDeck() throws IOException {
         try (InputStream input = FileLoader.class.getClassLoader().getResourceAsStream(DECK_FILE)) {
             if (input == null) {
                 throw new IllegalArgumentException("File does not exist.");
@@ -35,10 +35,8 @@ public class FileLoader {
                     new InputStreamReader(input, StandardCharsets.UTF_8))) {
                 return readCards(reader);
             }
-        } catch (IOException | IllegalArgumentException e) {
-            String reason = (e instanceof IOException) ? "File cannot be opened." : e.getMessage();
-            System.out.println("Error: " + reason + " Please check the input.txt file.");
-            return new Deck();
+        } catch (IOException e) {
+            throw new IOException("Failed to read the deck file.", e);
         }
     }
 
@@ -80,11 +78,12 @@ public class FileLoader {
         if (tokenizer.countTokens() != 2) {
             throw new IllegalArgumentException("Invalid card format (expected SUIT-RANK, e.g. D-A).");
         }
-        Suit suit = Suit.fromSymbol(tokenizer.nextToken());
-        Rank rank = Rank.fromSymbol(tokenizer.nextToken());
-        if (suit == null || rank == null) {
-            throw new IllegalArgumentException("Invalid card format (unknown suit or rank).");
+        try {
+            Suit suit = Suit.fromSymbol(tokenizer.nextToken());
+            Rank rank = Rank.fromSymbol(tokenizer.nextToken());
+            return new Card(rank, suit);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("Invalid card \"" + token + "\": " + e.getMessage() + ".", e);
         }
-        return new Card(rank, suit);
     }
 }

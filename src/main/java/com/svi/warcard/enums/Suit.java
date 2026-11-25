@@ -1,32 +1,34 @@
 package com.svi.warcard.enums;
 
 /**
- * Suits, declared lowest to highest: clubs, spades, hearts, diamonds.
- *
- * @author Chariss Borlaza
- * @since 1.0
+ * The four suits of a standard deck.
  */
 public enum Suit {
-    CLUBS("C"), SPADES("S"), HEARTS("H"), DIAMONDS("D");
+    DIAMONDS("D", "♦"),
+    HEARTS("H", "♥"),
+    SPADES("S", "♠"),
+    CLUBS("C", "♣");
 
     private final String symbol;
+    private final String icon;
 
-    /**
-     * Creates a suit.
-     */
-    Suit(String symbol) {
+    Suit(String symbol, String icon) {
         this.symbol = symbol;
+        this.icon = icon;
     }
 
-    /**
-     * Gets the suit's letter.
-     */
+    /** Returns the one-letter symbol, e.g. "H". */
     public String getSymbol() {
         return symbol;
     }
 
+    /** Returns the Unicode icon, e.g. "♥". */
+    public String getIcon() {
+        return icon;
+    }
+
     /**
-     * Looks up a suit by its letter.
+     * Looks up a suit by its symbol.
      */
     public static Suit fromSymbol(String text) {
         for (Suit currentSuit : values()) {
@@ -34,6 +36,6 @@ public enum Suit {
                 return currentSuit;
             }
         }
-        return null;
+        throw new IllegalArgumentException("Unknown suit \"" + text + "\"");
     }
 }

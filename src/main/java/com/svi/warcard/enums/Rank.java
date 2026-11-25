@@ -36,6 +36,6 @@ public enum Rank {
                 return currentRank;
             }
         }
-        return null;
+        throw new IllegalArgumentException("Unknown rank \"" + text + "\"");
     }
 }
