@@ -1,0 +1,57 @@
+package com.svi.warcard.game;
+
+import com.svi.warcard.io.InputHandler;
+import com.svi.warcard.model.Deck;
+import com.svi.warcard.model.Game;
+
+import com.svi.warcard.io.FileLoader;
+import com.svi.warcard.model.Player;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class GameLauncher {
+    public static void launch() {
+        FileLoader loader = new FileLoader();
+
+        boolean finished = false;
+
+        try {
+            do {
+                InputHandler.showIntro();
+                Deck gameDeck = loader.loadDeck();
+                if (gameDeck.isEmpty()) {
+                    System.out.println("Exiting program.");
+                    finished = true;
+                } else {
+                    int numPlayers = InputHandler.promptNumPlayers();
+                    int numShuffles = InputHandler.promptNumShuffles();
+
+                    System.out.println();
+                    System.out.println("Initial Deck:");
+                    gameDeck.display();
+
+                    List<Player> players = new ArrayList<>();
+                    for (int i = 1; i <= numPlayers; i++) {
+                        players.add(new Player(i));
+                    }
+
+                    Game game = new Game(players, gameDeck);
+                    game.prepareGame(numShuffles);
+                    while (!game.isGameOver()) {
+                        game.playRound();
+                    }
+                    game.displayGameOver();
+
+                    if (!InputHandler.promptPlayAgain()) {
+
+                        finished = true;
+                    }
+                }
+            } while (!finished);
+        } catch (Exception e) {
+            System.out.println();
+            System.out.println("An unexpected error occurred: " + e.getMessage());
+        }
+    }
+}
